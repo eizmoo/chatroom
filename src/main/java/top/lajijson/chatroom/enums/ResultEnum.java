@@ -12,6 +12,11 @@ public enum ResultEnum {
     SUCCESS(200, "访问成功"),
 
     /**
+     * 参数校验异常
+     */
+    BAD_REQUEST(400, "参数校验异常"),
+
+    /**
      * 未知异常
      */
     FAIL(500, "未知异常"),

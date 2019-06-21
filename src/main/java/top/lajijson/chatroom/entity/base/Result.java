@@ -51,6 +51,13 @@ public class Result<T> {
         this.success = success;
     }
 
+    public Result(boolean success, int code, String message, T data) {
+        this.success = success;
+        this.code = code;
+        this.message = message;
+        this.data = data;
+    }
+
     /**
      * 有data构造参数
      *
@@ -133,5 +140,14 @@ public class Result<T> {
      */
     public static Result failResult() {
         return new Result(ResultEnum.FAIL, false);
+    }
+
+    /**
+     * 失败，自定义code和message
+     *
+     * @return
+     */
+    public static Result failResult(int code, String message) {
+        return new Result(false, code, message, null);
     }
 }
