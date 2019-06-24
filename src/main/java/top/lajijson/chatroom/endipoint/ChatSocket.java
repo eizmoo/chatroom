@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import top.lajijson.chatroom.entity.base.Message;
+import top.lajijson.chatroom.enums.ChatSocketTypeEnum;
 import top.lajijson.chatroom.service.MessageHandleStrategyContext;
 
 import javax.websocket.OnClose;
@@ -59,10 +60,12 @@ public class ChatSocket {
      */
     @OnOpen
     public void onOpen(@PathParam(value = "token") String token, Session session) {
+        // 保存个人chatSocket对象
         this.session = session;
         this.token = token;
+        this.type = ChatSocketTypeEnum.PERSONAL.getCode();
         CHAT_SOCKET_CONCURRENT_HASH_MAP.put(token, this);
-        log.info("new connect,token:{}.  current total:{}", token, CHAT_SOCKET_CONCURRENT_HASH_MAP.size());
+        log.info("新连接，token为{}。当前连接总数:{}", token, CHAT_SOCKET_CONCURRENT_HASH_MAP.size());
     }
 
     /**
@@ -73,7 +76,7 @@ public class ChatSocket {
     @OnClose
     public void onClose(@PathParam(value = "token") String token) {
         CHAT_SOCKET_CONCURRENT_HASH_MAP.remove(token);
-        log.info("disconnect,token:{}.  current total:{}", token, CHAT_SOCKET_CONCURRENT_HASH_MAP.size());
+        log.info("token{}断开连接。当前连接总数:{}", token, CHAT_SOCKET_CONCURRENT_HASH_MAP.size());
     }
 
     /**

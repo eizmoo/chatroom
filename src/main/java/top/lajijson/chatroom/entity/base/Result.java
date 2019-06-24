@@ -51,7 +51,7 @@ public class Result<T> {
         this.success = success;
     }
 
-    public Result(boolean success, int code, String message, T data) {
+    private Result(boolean success, int code, String message, T data) {
         this.success = success;
         this.code = code;
         this.message = message;

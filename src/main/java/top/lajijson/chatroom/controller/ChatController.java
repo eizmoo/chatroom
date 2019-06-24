@@ -23,12 +23,12 @@ public class ChatController {
     private ChatService chatService;
 
     /**
-     * 获取当前用户
+     * 获取当前用户list
      *
      * @param bo
      * @return
      */
-    @RequestMapping(method = RequestMethod.GET, value = "/user/")
+    @RequestMapping(method = RequestMethod.GET, value = "/user")
     public Result userList(@Valid UserListBo bo) {
         return Result.successResult(chatService.userList(bo));
     }
