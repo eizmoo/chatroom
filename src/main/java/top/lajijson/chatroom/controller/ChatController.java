@@ -1,6 +1,7 @@
 package top.lajijson.chatroom.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,7 +40,7 @@ public class ChatController {
      * @return
      */
     @RequestMapping(method = RequestMethod.POST, value = "/message")
-    public Result sendMessage(@Valid Message message) {
+    public Result sendMessage(@RequestBody @Valid Message message) {
         try {
             chatService.sendMessage(message);
         } catch (Exception e) {
